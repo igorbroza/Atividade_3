@@ -15,11 +15,36 @@ function fazerPergunta(){
     });
 }
 
+function chamarImagem(){
+    axios.get('https://dog.ceo/api/breeds/image/random')
+    .then(response => {
+
+        console.log(response.data.message);
+        const fotoApi = response.data.message;
+        
+
+        preencherFoto(fotoApi)
+    })
+    .catch(error => {
+        console.log('Deu erro, se vira ai: ', error);
+    });
+}
+
 const botaoFazerPergunta = document.getElementById('btPergunta');
 
 botaoFazerPergunta.addEventListener('click', () => {
     fazerPergunta();
 })
+
+const botaoGerarImagem = document.getElementById('btImagem');
+
+botaoGerarImagem.addEventListener('click', () => {
+    chamarImagem();
+})
+
+function preencherFoto(fotoApi){
+    document.getElementById("fotoApi").src=fotoApi;
+}
 
 function preencherPergunta(pergunta){
     document.getElementById("pergunta").textContent=pergunta;
